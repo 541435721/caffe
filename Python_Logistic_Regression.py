@@ -65,8 +65,23 @@ def logreg(hdf5, batch_size):
     return n.to_proto()
 
 
+# 写入数据集到prototxt文件
 with open('logreg_auto_train.prototxt', 'w') as f:
     f.write(str(logreg('train.txt', 10)))
 
 with open('logreg_auto_test.prototxt', 'w') as f:
     f.write(str(logreg('test.txt', 10)))
+
+caffe.set_mode_gpu()#设置GPU模式
+solver = caffe.get_solver('solver.prototxt')
+solver.solve()
+
+accuracy = 0
+batch_size = solver.test_nets[0].blobs['data'].num
+test_iters = int(len(Xt) / batch_size)
+for i in range(test_iters):
+    solver.test_nets[0].forward()
+    accuracy += solver.test_nets[0].blobs['accuracy'].data
+accuracy /= test_iters
+
+print("Accuracy: {:.3f}".format(accuracy))
