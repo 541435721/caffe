@@ -72,8 +72,9 @@ with open('logreg_auto_train.prototxt', 'w') as f:
 with open('logreg_auto_test.prototxt', 'w') as f:
     f.write(str(logreg('test.txt', 10)))
 
+# 训练网络
 caffe.set_mode_gpu()#设置GPU模式
-solver = caffe.get_solver('solver.prototxt')
+solver = caffe.get_solver('solver.prototxt')#设置优化器配置文件
 solver.solve()
 
 accuracy = 0

@@ -12,3 +12,4 @@ display: 100
 max_iter: 10000 # 训练的最大迭代次数
 snapshot: 5000 # 快照迭代帧数
 snapshot_prefix: "." # 保存快照目录
+solver_mode: GPU
