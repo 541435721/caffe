@@ -73,8 +73,8 @@ with open('logreg_auto_test.prototxt', 'w') as f:
     f.write(str(logreg('test.txt', 10)))
 
 # 训练网络
-caffe.set_mode_gpu()#设置GPU模式
-solver = caffe.get_solver('solver.prototxt')#设置优化器配置文件
+caffe.set_mode_cpu()  # 设置GPU模式
+solver = caffe.get_solver('solver.prototxt')  # 设置优化器配置文件
 solver.solve()
 
 accuracy = 0
@@ -86,3 +86,4 @@ for i in range(test_iters):
 accuracy /= test_iters
 
 print("Accuracy: {:.3f}".format(accuracy))
+

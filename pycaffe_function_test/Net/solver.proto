@@ -1,0 +1,15 @@
+train_net: "train.proto" # 训练集的prototxt文件目录
+test_net: "test.proto" # 测试集的prototxt文件目录
+test_iter: 250 # 每一次测试时进行100次forward pass
+test_interval: 1000 # 每500次训练进行一次测试（100次解算），根据train用例数量和batch_size得出
+base_lr: 0.01 # 开始学习速率
+momentum: 0.9
+weight_decay: 0.0005 # 权值衰减率
+lr_policy: "step" # 学习策略: 每 stepsize 次迭代之后，将 α 乘以 gamma
+stepsize:5000
+gamma: 0.001 # 学习速率变化因子
+power: 0.75
+display: 100
+max_iter: 10000 # 训练的最大迭代次数
+snapshot: 5000 # 快照迭代帧数
+snapshot_prefix: "snap" # 保存快照目录
